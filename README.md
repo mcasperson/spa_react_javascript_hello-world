@@ -1,21 +1,23 @@
-# Easy User Authentication for React Apps
+# Hello, React World!
 
-This repository hosts a React project that defines a Single-Page Application (SPA). You'll secure access to some of its routes using Auth0 User Authentication.
+You can use this sample project to learn how to secure a simple React application using Auth0.
+
+The `starter` branch offers a functional application that consumes local data to hydrate the user interface. All the starter application routes are public.
+
+The goal is to use Auth0 to get an ID token to hydrate the user profile information present in the `/profile` page and to get an access token to make a secure call to an external API to hydrate the messages present in the `/external-api` page.
 
 ## Get Started
 
-Install the client project dependencies:
+Install the project dependencies:
 
 ```bash
 npm install
 ```
 
-Run the client project:
+Run the application:
 
 ```bash
 npm start
 ```
-
-The application runs by on port `4040` to mitigate conflicting with other client applications you may be running.
 
 Visit [`http://localhost:4040/`](http://localhost:4040/) to access the starter application.
