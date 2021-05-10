@@ -1,6 +1,7 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
+import { AuthenticationButton } from "../security/authentication-button";
 
 export const NavBar = () => {
   return (
@@ -34,6 +35,9 @@ export const NavBar = () => {
           >
             External API
           </NavLink>
+        </div>
+        <div className="nav-bar__actions">
+          <AuthenticationButton />
         </div>
       </nav>
     </div>

@@ -1,19 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const ExternalApi = () => {
-  const messages = {
-    public: "The API doesn't require an access token to share this message.",
-    protected: "The API successfully validated your access token.",
-    admin: "The API successfully recognized you as an admin.",
+  const [message, setMessage] = useState(null);
+  const [activeMessage, setActiveMessage] = useState(null);
+
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const { getAccessTokenSilently } = useAuth0();
+
+  const callApi = async (messageType) => {
+    const response = await fetch(`${serverUrl}/api/messages/${messageType}`);
+
+    if (!response.ok) {
+      return `${response.status} ${response.statusText}`;
+    }
+
+    const { message } = await response.json();
+
+    return message;
   };
 
-  const [message, setMessage] = useState(messages.public);
-  const [activeMessage, setActiveMessage] = useState("public");
+  const callSecureApi = async (messageType) => {
+    const token = await getAccessTokenSilently();
 
-  const getMessage = (type) => {
-    setActiveMessage(type);
-    return setMessage(messages[type]);
+    const response = await fetch(`${serverUrl}/api/messages/${messageType}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      return `${response.status} ${response.statusText}`;
+    }
+
+    const { message } = await response.json();
+
+    return message;
   };
+
+  const getMessage = async (type) => {
+    try {
+      const message =
+        type === "public" ? await callApi(type) : await callSecureApi(type);
+
+      setActiveMessage(type);
+      setMessage(message);
+    } catch (error) {
+      setMessage(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getMessage("public");
+  }, []);
 
   return (
     <div className="content-layout">
