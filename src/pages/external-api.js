@@ -5,7 +5,7 @@ export const ExternalApi = () => {
   const [message, setMessage] = useState(null);
   const [activeMessage, setActiveMessage] = useState(null);
 
-  const serverUrl = process.env.REACT_APP_API_SERVER_URL;
+  const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
   const { getAccessTokenSilently } = useAuth0();
 
   const callApi = async (url, config = {}) => {
@@ -40,7 +40,7 @@ export const ExternalApi = () => {
   };
 
   const getMessage = async (type) => {
-    const resourceUrl = `${serverUrl}/api/messages/${type}`;
+    const resourceUrl = `${apiServerUrl}/api/messages/${type}`;
     setActiveMessage(type);
 
     const config = {};
