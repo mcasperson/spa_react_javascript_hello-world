@@ -1,7 +1,7 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
-import { AuthenticationButton } from "../security/authentication-button";
+import { AuthenticationButton } from "./buttons/authentication-button";
 
 export const NavBar = () => {
   return (
@@ -11,7 +11,7 @@ export const NavBar = () => {
           <NavLink to="/">
             <img
               className="nav-bar__logo"
-              src="https://images.ctfassets.net/23aumh6u8s0i/66PimSweOgch2IecnHiyca/2d8cfd25a66d2ac297ab4a9ff3e2f6f1/auth0-shield.svg"
+              src="https://images.ctfassets.net/23aumh6u8s0i/1UiaijF2PoaHIfcaIMRWYZ/cba84a2df9ba67f48e80aa117d0c78a3/auth0-shield.svg"
               alt="Auth0 shield logo"
               width="35.98"
               height="40"

@@ -6,7 +6,7 @@ export const LoginButton = () => {
 
   return (
     <button
-      className="button button--primary"
+      className="button button--primary button--compact"
       onClick={() => loginWithRedirect()}
     >
       Log In

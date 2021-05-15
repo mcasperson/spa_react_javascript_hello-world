@@ -7,7 +7,7 @@ import { Profile } from "./pages/profile";
 import { ExternalApi } from "./pages/external-api";
 import { Footer } from "./components/footer";
 import { Loader } from "./components/loader";
-import { ProtectedRoute } from "./security/protected-route";
+import { ProtectedRoute } from "./components/protected-route";
 
 import { useAuth0 } from "@auth0/auth0-react";
 

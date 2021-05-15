@@ -5,47 +5,56 @@ export const ExternalApi = () => {
   const [message, setMessage] = useState(null);
   const [activeMessage, setActiveMessage] = useState(null);
 
-  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const serverUrl = process.env.REACT_APP_API_SERVER_URL;
   const { getAccessTokenSilently } = useAuth0();
 
-  const callApi = async (messageType) => {
-    const response = await fetch(`${serverUrl}/api/messages/${messageType}`);
+  const callApi = async (url, config = {}) => {
+    let options = {};
 
-    if (!response.ok) {
-      return `${response.status} ${response.statusText}`;
+    if (config.secure) {
+      const token = await getAccessTokenSilently();
+
+      options = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        ...options,
+      };
     }
 
-    const { message } = await response.json();
+    const response = await fetch(url, options);
 
-    return message;
-  };
+    const { status, statusText, ok } = response;
 
-  const callSecureApi = async (messageType) => {
-    const token = await getAccessTokenSilently();
-
-    const response = await fetch(`${serverUrl}/api/messages/${messageType}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      return `${response.status} ${response.statusText}`;
+    if (status === 404) {
+      return `${status} ${statusText}`;
     }
 
-    const { message } = await response.json();
+    let { message } = await response.json();
+
+    if (!ok) {
+      message = `${status} ${message}`;
+    }
 
     return message;
   };
 
   const getMessage = async (type) => {
-    try {
-      const message =
-        type === "public" ? await callApi(type) : await callSecureApi(type);
+    const resourceUrl = `${serverUrl}/api/messages/${type}`;
+    setActiveMessage(type);
 
-      setActiveMessage(type);
+    const config = {};
+
+    if (type !== "public") {
+      config.secure = true;
+    }
+
+    try {
+      const message = await callApi(resourceUrl, config);
+
       setMessage(message);
     } catch (error) {
+      console.log(error);
       setMessage(error.message);
     }
   };
@@ -59,10 +68,9 @@ export const ExternalApi = () => {
       <h1 className="content__title">External API</h1>
       <div className="content__body">
         <p>
-          You will use a button to call an external API using an access token,
-          and the API will validate it using the API's audience value.
+          You can use the buttons below make calls to an external API.
           <br />
-          <strong>This route should be protected</strong>.
+          <strong>Only logged-in users can access this page.</strong>
         </p>
 
         <div className="messages-grid">
