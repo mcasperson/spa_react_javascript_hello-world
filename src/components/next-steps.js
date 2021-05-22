@@ -1,27 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const NextStep = ({ title, description, resourceUrl }) => (
-  <div className="next-step">
+const NextStep = ({ title, description, resourceUrl, icon }) => (
+  <a
+    href={resourceUrl}
+    className="next-step"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     <h3 className="next-step__headline">
-      <a
-        className="next-step__link"
-        target="_blank"
-        rel="noopener noreferrer"
-        href={resourceUrl}
-      >
-        <img
-          className="next-step__icon"
-          src="https://images.ctfassets.net/23aumh6u8s0i/3XjgU91NyZtuzUBDmqaG4Q/1f4add38d042abf421fdd099610db855/external-link.svg"
-          alt="external link icon"
-          width="20"
-          height="20"
-        />
-        <span className="next-step__title">{title}</span>
-      </a>
+      <img className="next-step__icon" src={icon} alt="external link icon" />
+      {title}
     </h3>
     <p className="next-step__description">{description}</p>
-  </div>
+  </a>
 );
 
 NextStep.propTypes = {
@@ -32,27 +24,31 @@ NextStep.propTypes = {
 
 export const NextSteps = () => (
   <div className="next-steps">
-    <h2 className="next-steps__title">What can I do next?</h2>
+    <h2 className="next-steps__title">Explore Auth0 Features</h2>
     <div className="next-steps__grid">
       <NextStep
-        title="Configure Other Identity Providers"
-        description="Auth0 supports social providers as Facebook, Twitter, Instagram and 100+, Enterprise providers as Microsoft Office 365, Google Apps, Azure, and more. You can also use any OAuth2 Authorization Server."
+        title="Identity Providers"
+        description="Auth0 supports social providers such as Google, Facebook, and Twitter, along with Enterprise providers such as Microsoft Office 365, Google Apps, and Azure. You can also use any OAuth 2.0 Authorization Server."
         resourceUrl="https://auth0.com/docs/connections"
+        icon="https://cdn.auth0.com/website/pricing/addons/hipaa-baa-icon.svg"
       />
       <NextStep
-        title="Enable Multi-Factor Authentication"
-        description="Add an extra layer of security by enabling Multi-factor Authentication, requiring your users to provide more than one piece of identifying information. Push notifications, authenticator apps, SMS, and DUO Security are supported."
+        title="Multi-Factor Authentication"
+        description="You can require your users to provide more than one piece of identifying information when logging in. MFA delivers one-time codes to your users via SMS, voice, email, WebAuthn, and push notifications."
         resourceUrl="https://auth0.com/docs/multifactor-authentication"
+        icon="https://cdn.auth0.com/website/pricing/addons/enterprise-mfa-icon.svg"
       />
       <NextStep
-        title="Learn About Anomaly Detection"
-        description="Auth0 can detect anomalies and stop malicious attempts to access your application. Anomaly detection can alert you and your users of suspicious activity, as well as block further login attempts."
-        resourceUrl="https://auth0.com/docs/anomaly-detection"
+        title="Attack Protection"
+        description="Auth0 can detect attacks and stop malicious attempts to access your application such as blocking traffic from certain IPs and displaying CAPTCHA. Auth0 supports the principle of layered protection in security that uses a variety of signals to detect and mitigate attacks."
+        resourceUrl="https://auth0.com/docs/attack-protection"
+        icon="https://cdn.auth0.com/website/pricing/addons/advanced-protection-icon.svg"
       />
       <NextStep
-        title="Learn About Actions"
+        title="Serverless Extensibility"
         description="Actions are functions that allow you to customize the behavior of Auth0. Each action is bound to a specific triggering event on the Auth0 platform. Auth0 invokes the custom code of these Actions when the corresponding triggering event is produced at runtime."
         resourceUrl="https://auth0.com/docs/actions"
+        icon="https://cdn.auth0.com/website/pricing/addons/private-cloud-icon.svg"
       />
     </div>
   </div>

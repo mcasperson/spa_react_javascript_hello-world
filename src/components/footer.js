@@ -89,7 +89,7 @@ export const Footer = () => {
           <div className="footer-brand">
             <img
               className="footer-brand__logo"
-              src="https://images.ctfassets.net/23aumh6u8s0i/66PimSweOgch2IecnHiyca/2d8cfd25a66d2ac297ab4a9ff3e2f6f1/auth0-shield.svg"
+              src="https://images.ctfassets.net/23aumh6u8s0i/1UiaijF2PoaHIfcaIMRWYZ/cba84a2df9ba67f48e80aa117d0c78a3/auth0-shield.svg"
               alt="Auth0"
               width="20"
               height="22.22"

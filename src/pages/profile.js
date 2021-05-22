@@ -30,10 +30,7 @@ export const Profile = () => {
       <h1 className="content__title">Profile</h1>
       <div className="content__body">
         <p>
-          You use will use an ID Token to get the profile information of a
-          logged-in user.
-          <br />
-          <strong>This route should be protected</strong>.
+          <strong>Only authenticated users can access this page.</strong>
         </p>
         <div className="profile-grid">
           <div className="profile__header">

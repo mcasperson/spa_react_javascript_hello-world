@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 export const ExternalApi = () => {
   const messages = {
-    public: "The API doesn't require an access token to share this message.",
-    protected: "The API successfully validated your access token.",
-    admin: "The API successfully recognized you as an admin.",
+    public: "Anyone can see this message.",
+    protected: "Only authenticated users should see this message.",
+    admin:
+      "Only authenticated users with the read:admin-messages permission should see this message.",
   };
 
   const [message, setMessage] = useState(messages.public);
@@ -54,9 +55,7 @@ export const ExternalApi = () => {
               Admin
             </div>
           </div>
-          <code className="messages-grid__message">
-            {JSON.stringify(message, null, 2)}
-          </code>
+          <code className="messages-grid__message">{message}</code>
         </div>
       </div>
     </div>
