@@ -90,10 +90,10 @@ export const ExternalApi = () => {
       <h1 className="content__title">External API</h1>
       <div className="content__body">
         <p>
-          You can use the buttons below to make secure calls to an external API
-          to retrieve the corresponding message.
+          You can use the buttons below to retrieve the corresponding message
+          from an external API.
           <br />
-          <strong>Only logged-in users can access this page.</strong>
+          <strong>Only authenticated users should access this page.</strong>
         </p>
 
         <div className="messages-grid">
