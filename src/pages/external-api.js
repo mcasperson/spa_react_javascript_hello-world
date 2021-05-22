@@ -9,37 +9,51 @@ export const ExternalApi = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   const callApi = async (url, config = {}) => {
-    let options = {};
+    let fetchOptions = {};
 
     if (config.secure) {
       const token = await getAccessTokenSilently();
 
-      options = {
+      fetchOptions = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        ...options,
+        ...fetchOptions,
       };
     }
 
-    const response = await fetch(url, options);
+    const response = await fetch(url, fetchOptions);
+    const responseBody = await response.json();
 
-    const { status, statusText, ok } = response;
-
-    if (status === 404) {
-      return `${status} ${statusText}`;
+    if (response.ok) {
+      return { error: null, data: responseBody };
     }
 
-    let { message } = await response.json();
-
-    if (!ok) {
-      message = `${status} ${message}`;
-    }
-
-    return message;
+    return {
+      error: {
+        status: response.status,
+        message: responseBody.message,
+      },
+      data: null,
+    };
   };
 
   const getMessage = async (type) => {
+    /**
+     * To call the /api/messages/admin endpoint, you need to log in
+     * as a user that has the messages-admin role, which in turn
+     * has the read:admin-messages permission.
+     * If you need help doing so, check out the following resources.
+     * Create roles:
+     * https://auth0.com/docs/authorization/rbac/roles/create-roles
+     * Create permissions:
+     * https://auth0.com/docs/get-started/dashboard/add-api-permissions
+     * Add permissions to roles:
+     * https://auth0.com/docs/authorization/rbac/roles/add-permissions-to-roles
+     * Assign roles to users:
+     * https://auth0.com/docs/users/assign-roles-to-users
+     */
+
     const resourceUrl = `${apiServerUrl}/api/messages/${type}`;
     setActiveMessage(type);
 
@@ -50,12 +64,20 @@ export const ExternalApi = () => {
     }
 
     try {
-      const message = await callApi(resourceUrl, config);
+      const { error, data } = await callApi(resourceUrl, config);
+      if (data) {
+        setMessage(data.message);
+        return;
+      }
 
-      setMessage(message);
+      if (error) {
+        setMessage(`Error ${error.status}: ${error.message}`);
+        return;
+      }
+
+      setMessage("Unable to retrieve messages.");
     } catch (error) {
-      console.log(error);
-      setMessage(error.message);
+      setMessage(error.message || error);
     }
   };
 
@@ -101,9 +123,7 @@ export const ExternalApi = () => {
               Admin
             </div>
           </div>
-          <code className="messages-grid__message">
-            {JSON.stringify(message, null, 2)}
-          </code>
+          <code className="messages-grid__message">{message}</code>
         </div>
       </div>
     </div>
