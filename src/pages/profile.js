@@ -22,6 +22,9 @@ export const Profile = () => {
       <h1 className="content__title">Profile</h1>
       <div className="content__body">
         <p>
+          You can use the ID Token to get the profile information of an
+          authenticated user.
+          <br />
           <strong>Only authenticated users can access this page.</strong>
         </p>
         <div className="profile-grid">
