@@ -74,7 +74,7 @@ REACT_APP_API_SERVER_URL=http://localhost:6060
 
 Head back to your Auth0 application page. Follow these steps to get the `REACT_APP_AUTH0_DOMAIN` and `REACT_APP_AUTH0_CLIENT_ID` values:
 
-![Auth0 application settings to enable user authentication](https://cdn.auth0.com/blog/complete-guide-to-user-authentication/auth0-application-settings.png)
+![Auth0 application settings to enable user authentication](https://images.ctfassets.net/23aumh6u8s0i/3jIw7AU2SbVOfAml3x6JNK/206be29f3784c5be87cee993dc8d7947/hello-world-client-settings.png)
 
 1. Click on the "Settings" tab, if you haven't already.
 
