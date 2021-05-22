@@ -21,10 +21,10 @@ export const ExternalApi = () => {
       <h1 className="content__title">External API</h1>
       <div className="content__body">
         <p>
-          You will use a button to call an external API using an access token,
-          and the API will validate it using the API's audience value.
+          You can use the buttons below to retrieve the corresponding message
+          from a local store.
           <br />
-          <strong>This route should be protected</strong>.
+          <strong>Only authenticated users should access this page.</strong>
         </p>
 
         <div className="messages-grid">
