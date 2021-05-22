@@ -90,7 +90,8 @@ export const ExternalApi = () => {
       <h1 className="content__title">External API</h1>
       <div className="content__body">
         <p>
-          You can use the buttons below make calls to an external API.
+          You can use the buttons below to make secure calls to an external API
+          to retrieve the corresponding message.
           <br />
           <strong>Only logged-in users can access this page.</strong>
         </p>
